@@ -21,10 +21,10 @@ public class SpaceShipDatabaseAdapter implements SpaceShipDatabasePort {
   private final SpaceShipDatabaseMapper spaceShipDatabaseMapper;
 
   @Override
-  public List<SpaceShip> findAll(Pageable pageable) {
+  public Page<SpaceShip> findAll(Pageable pageable) {
     Page<SpaceShipMO> spaceShipMOs = spaceShipRepository.findAll(pageable);
 
-    return spaceShipMOs.stream().map(spaceShipDatabaseMapper::toDomain).toList();
+    return spaceShipMOs.map(spaceShipDatabaseMapper::toDomain);
   }
 
   @Override

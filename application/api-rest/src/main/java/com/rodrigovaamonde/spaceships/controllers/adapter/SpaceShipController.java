@@ -1,11 +1,13 @@
 package com.rodrigovaamonde.spaceships.controllers.adapter;
 
 import com.rodrigovaamonde.spaceships.controllers.api.SpaceShipApi;
+import com.rodrigovaamonde.spaceships.controllers.dto.PagedResponse;
 import com.rodrigovaamonde.spaceships.controllers.dto.SpaceShipDTO;
 import com.rodrigovaamonde.spaceships.controllers.mapper.SpaceShipMapper;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.application.SpaceShipPort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,12 +55,17 @@ public class SpaceShipController implements SpaceShipApi {
   }
 
   @Override
-  public ResponseEntity<List<SpaceShipDTO>> getAllSpaceShips(Integer page, Integer size) {
-    List<SpaceShip> spaceShipList = spaceShipPort.findAll(page, size);
-    List<SpaceShipDTO> spaceShipDTOs = spaceShipList.stream()
-        .map(spaceShipMapper::toDTO)
-        .toList();
+  public ResponseEntity<PagedResponse<SpaceShipDTO>> getAllSpaceShips(Integer page, Integer size) {
+    Page<SpaceShip> spaceShipPage = spaceShipPort.findAll(page, size);
 
-    return ResponseEntity.ok(spaceShipDTOs);
+    List<SpaceShipDTO> spaceShipDTOs =
+        spaceShipPage.getContent().stream().map(spaceShipMapper::toDTO).toList();
+
+    return ResponseEntity.ok(
+        new PagedResponse<>(
+            spaceShipDTOs,
+            spaceShipPage.getNumber(),
+            spaceShipPage.getTotalPages(),
+            spaceShipPage.getTotalElements()));
   }
 }

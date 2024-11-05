@@ -5,6 +5,7 @@ import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.application.SpaceShipPort;
 import com.rodrigovaamonde.spaceships.domain.port.infrastructure.SpaceShipDatabasePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
@@ -18,7 +19,7 @@ public class SpaceShipUseCase implements SpaceShipPort {
   private final SpaceShipDatabasePort spaceShipDatabasePort;
 
   @Override
-  public List<SpaceShip> findAll(int page, int size) {
+  public Page<SpaceShip> findAll(int page, int size) {
     Pageable pageable = PageRequest.of(page, size);
 
     return spaceShipDatabasePort.findAll(pageable);

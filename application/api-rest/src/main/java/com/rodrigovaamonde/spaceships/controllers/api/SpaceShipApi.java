@@ -1,6 +1,7 @@
 package com.rodrigovaamonde.spaceships.controllers.api;
 
 import com.rodrigovaamonde.spaceships.controllers.dto.ErrorResource;
+import com.rodrigovaamonde.spaceships.controllers.dto.PagedResponse;
 import com.rodrigovaamonde.spaceships.controllers.dto.SpaceShipDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -298,7 +299,7 @@ public interface SpaceShipApi {
       method = RequestMethod.GET,
       value = "/spaceship",
       produces = {"application/json"})
-  default ResponseEntity<List<SpaceShipDTO>> getAllSpaceShips(
+  default ResponseEntity<PagedResponse<SpaceShipDTO>> getAllSpaceShips(
       @Parameter(
               name = "page",
               description = "Page number",
