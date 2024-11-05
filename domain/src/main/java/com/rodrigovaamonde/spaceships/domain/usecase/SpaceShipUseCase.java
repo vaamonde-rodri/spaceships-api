@@ -22,7 +22,7 @@ public class SpaceShipUseCase implements SpaceShipPort {
 
   @Override
   public SpaceShip findById(Long id) {
-    return null;
+    return spaceShipDatabasePort.findById(id);
   }
 
   @Override

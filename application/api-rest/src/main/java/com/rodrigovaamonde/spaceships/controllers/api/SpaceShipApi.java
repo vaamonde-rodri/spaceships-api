@@ -138,4 +138,62 @@ public interface SpaceShipApi {
           SpaceShipDTO spaceShipDTO) {
     return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
   }
+
+  @Operation(
+      operationId = "getSpaceShip",
+      summary = "Get a SpaceShip by ID",
+      description = "Get a SpaceShip by ID",
+      tags = {"SpaceShips"},
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "SpaceShip found",
+            content = @Content(schema = @Schema(implementation = SpaceShipDTO.class))),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Invalid input",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "403",
+            description = "Forbidden",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "404",
+            description = "SpaceShip not found",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            })
+      })
+  @RequestMapping(
+      method = RequestMethod.GET,
+      value = "/spaceship/{id}",
+      produces = {"application/json"})
+  default ResponseEntity<SpaceShipDTO> getSpaceShip(
+      @Parameter(
+              name = "id",
+              description = "ID of the SpaceShip that needs to be retrieved",
+              required = true,
+              in = ParameterIn.PATH)
+          @PathVariable("id")
+          Long id) {
+    return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+  }
 }

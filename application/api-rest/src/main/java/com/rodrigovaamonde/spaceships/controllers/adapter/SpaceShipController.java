@@ -36,4 +36,11 @@ public class SpaceShipController implements SpaceShipApi {
                     spaceShipMapper.toDTO(spaceShipPort.update(id, spaceShipMapper.toDomain(dto)))))
         .orElse(ResponseEntity.badRequest().build());
   }
+
+  @Override
+  public ResponseEntity<SpaceShipDTO> getSpaceShip(Long id) {
+    SpaceShipDTO spaceShipDTO = spaceShipMapper.toDTO(spaceShipPort.findById(id));
+
+    return ResponseEntity.ok(spaceShipDTO);
+  }
 }
