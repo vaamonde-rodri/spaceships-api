@@ -3,6 +3,7 @@ package com.rodrigovaamonde.spaceships.domain.usecase;
 import com.rodrigovaamonde.spaceships.domain.annotation.UseCase;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.application.SpaceShipPort;
+import com.rodrigovaamonde.spaceships.domain.port.infrastructure.SpaceShipDatabasePort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 @UseCase
 @RequiredArgsConstructor
 public class SpaceShipUseCase implements SpaceShipPort {
+
+    private final SpaceShipDatabasePort spaceShipDatabasePort;
 
     @Override
     public List<SpaceShip> findAll() {
@@ -28,7 +31,7 @@ public class SpaceShipUseCase implements SpaceShipPort {
 
     @Override
     public SpaceShip create(SpaceShip spaceShip) {
-        return SpaceShip.builder().build();
+        return spaceShipDatabasePort.create(spaceShip);
     }
 
     @Override

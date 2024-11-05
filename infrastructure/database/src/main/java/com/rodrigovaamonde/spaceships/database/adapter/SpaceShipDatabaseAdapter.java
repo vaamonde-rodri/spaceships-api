@@ -1,39 +1,47 @@
 package com.rodrigovaamonde.spaceships.database.adapter;
 
+import com.rodrigovaamonde.spaceships.database.mapper.SpaceShipDatabaseMapper;
+import com.rodrigovaamonde.spaceships.database.repository.SpaceShipRepository;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.infrastructure.SpaceShipDatabasePort;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class SpaceShipDatabaseAdapter implements SpaceShipDatabasePort {
 
-    @Override
-    public List<SpaceShip> findAll() {
-        return List.of();
-    }
+  private final SpaceShipRepository spaceShipRepository;
+  private final SpaceShipDatabaseMapper spaceShipDatabaseMapper;
 
-    @Override
-    public SpaceShip findById(Long id) {
-        return null;
-    }
+  @Override
+  public List<SpaceShip> findAll() {
+    return List.of();
+  }
 
-    @Override
-    public List<SpaceShip> findByName(String name) {
-        return List.of();
-    }
+  @Override
+  public SpaceShip findById(Long id) {
+    return null;
+  }
 
-    @Override
-    public SpaceShip create(SpaceShip spaceShip) {
-        return null;
-    }
+  @Override
+  public List<SpaceShip> findByName(String name) {
+    return List.of();
+  }
 
-    @Override
-    public SpaceShip update(Long id, SpaceShip spaceShip) {
-        return null;
-    }
+  @Override
+  public SpaceShip create(SpaceShip spaceShip) {
+    return spaceShipDatabaseMapper.toDomain(
+        spaceShipRepository.save(spaceShipDatabaseMapper.toMO(spaceShip)));
+  }
 
-    @Override
-    public void delete(Long id) {
+  @Override
+  public SpaceShip update(Long id, SpaceShip spaceShip) {
+    return null;
+  }
 
-    }
+  @Override
+  public void delete(Long id) {}
 }
