@@ -3,8 +3,6 @@ package com.rodrigovaamonde.spaceships.domain.port.application;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface SpaceShipPort {
 
     Page<SpaceShip> findAll(int page, int size);
