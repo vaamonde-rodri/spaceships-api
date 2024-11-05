@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SpaceShip {
+    private Long id;
     private String name;
     private String description;
     private String source;

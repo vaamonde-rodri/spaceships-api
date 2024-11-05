@@ -3,6 +3,7 @@ package com.rodrigovaamonde.spaceships.domain.port.infrastructure;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SpaceShipDatabasePort {
     List<SpaceShip> findAll();
@@ -11,9 +12,7 @@ public interface SpaceShipDatabasePort {
 
     List<SpaceShip> findByName(String name);
 
-    SpaceShip create(SpaceShip spaceShip);
-
-    SpaceShip update(Long id, SpaceShip spaceShip);
+    SpaceShip save(SpaceShip spaceShip);
 
     void delete(Long id);
 
