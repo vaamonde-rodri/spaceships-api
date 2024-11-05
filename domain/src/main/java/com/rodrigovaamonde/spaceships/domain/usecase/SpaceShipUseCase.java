@@ -31,8 +31,9 @@ public class SpaceShipUseCase implements SpaceShipPort {
   }
 
   @Override
-  public List<SpaceShip> findByName(String name) {
-    return List.of();
+  public Page<SpaceShip> findByName(String name, int page, int size) {
+    Pageable pageable = PageRequest.of(page, size);
+    return spaceShipDatabasePort.findByName(name, pageable);
   }
 
   @Override

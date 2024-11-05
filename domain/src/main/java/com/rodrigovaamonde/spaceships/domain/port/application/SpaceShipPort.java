@@ -11,7 +11,7 @@ public interface SpaceShipPort {
 
     SpaceShip findById(Long id);
 
-    List<SpaceShip> findByName(String name);
+    Page<SpaceShip> findByName(String name, int page, int size);
 
     SpaceShip create(SpaceShip spaceShip);
 

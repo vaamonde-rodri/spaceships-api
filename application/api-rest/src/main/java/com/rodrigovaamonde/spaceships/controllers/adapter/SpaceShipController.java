@@ -68,4 +68,19 @@ public class SpaceShipController implements SpaceShipApi {
             spaceShipPage.getTotalPages(),
             spaceShipPage.getTotalElements()));
   }
+
+  @Override
+    public ResponseEntity<PagedResponse<SpaceShipDTO>> searchSpaceShips(String name, Integer page, Integer size) {
+        Page<SpaceShip> spaceShipPage = spaceShipPort.findByName(name, page, size);
+
+        List<SpaceShipDTO> spaceShipDTOs =
+            spaceShipPage.getContent().stream().map(spaceShipMapper::toDTO).toList();
+
+        return ResponseEntity.ok(
+            new PagedResponse<>(
+                spaceShipDTOs,
+                spaceShipPage.getNumber(),
+                spaceShipPage.getTotalPages(),
+                spaceShipPage.getTotalElements()));
+    }
 }

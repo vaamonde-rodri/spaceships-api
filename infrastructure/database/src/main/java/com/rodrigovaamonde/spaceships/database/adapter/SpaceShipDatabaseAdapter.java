@@ -35,8 +35,10 @@ public class SpaceShipDatabaseAdapter implements SpaceShipDatabasePort {
   }
 
   @Override
-  public List<SpaceShip> findByName(String name) {
-    return List.of();
+  public Page<SpaceShip> findByName(String name, Pageable pageable) {
+    Page<SpaceShipMO> spaceShipMOs = spaceShipRepository.findByNameContainingIgnoreCase(name, pageable);
+
+    return spaceShipMOs.map(spaceShipDatabaseMapper::toDomain);
   }
 
   @Override

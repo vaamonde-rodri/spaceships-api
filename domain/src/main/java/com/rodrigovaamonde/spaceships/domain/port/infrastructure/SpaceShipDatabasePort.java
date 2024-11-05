@@ -11,7 +11,7 @@ public interface SpaceShipDatabasePort {
 
     SpaceShip findById(Long id);
 
-    List<SpaceShip> findByName(String name);
+    Page<SpaceShip> findByName(String name, Pageable pageable);
 
     SpaceShip save(SpaceShip spaceShip);
 

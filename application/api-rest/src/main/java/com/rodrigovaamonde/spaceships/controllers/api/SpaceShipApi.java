@@ -16,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Validated
 @Tag(name = "SpaceShip", description = "SpaceShip API")
 public interface SpaceShipApi {
@@ -308,7 +306,75 @@ public interface SpaceShipApi {
           @RequestParam(name = "page", defaultValue = "0")
           Integer page,
       @Parameter(name = "size", description = "Page size", required = true, in = ParameterIn.QUERY)
-          @RequestParam(name = "size", defaultValue = "20")
+          @RequestParam(name = "size", defaultValue = "5")
+          Integer size) {
+    return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+  }
+
+  @Operation(
+      operationId = "searchSpaceShips",
+      summary = "Search SpaceShips",
+      description = "Search SpaceShips",
+      tags = {"SpaceShips"},
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "SpaceShips found",
+            content = @Content(schema = @Schema(implementation = SpaceShipDTO.class))),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Invalid input",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "403",
+            description = "Forbidden",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "404",
+            description = "SpaceShips not found",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            })
+      })
+  @RequestMapping(
+      method = RequestMethod.GET,
+      value = "/spaceship/search",
+      produces = {"application/json"})
+  default ResponseEntity<PagedResponse<SpaceShipDTO>> searchSpaceShips(
+      @Parameter(
+              name = "name",
+              description = "Name of the SpaceShip that needs to be retrieved",
+              required = true,
+              in = ParameterIn.QUERY)
+          @RequestParam(name = "name")
+          String name,
+      @Parameter(
+              name = "page",
+              description = "Page number",
+              required = true,
+              in = ParameterIn.QUERY)
+          @RequestParam(name = "page", defaultValue = "0")
+          Integer page,
+      @Parameter(name = "size", description = "Page size", required = true, in = ParameterIn.QUERY)
+          @RequestParam(name = "size", defaultValue = "5")
           Integer size) {
     return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
   }
