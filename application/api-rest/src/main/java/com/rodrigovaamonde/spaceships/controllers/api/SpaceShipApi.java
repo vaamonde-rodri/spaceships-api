@@ -196,4 +196,59 @@ public interface SpaceShipApi {
           Long id) {
     return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
   }
+
+  @Operation(
+      operationId = "deleteSpaceShip",
+      summary = "Delete a SpaceShip by ID",
+      description = "Delete a SpaceShip by ID",
+      tags = {"SpaceShips"},
+      responses = {
+        @ApiResponse(responseCode = "204", description = "SpaceShip deleted"),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Invalid input",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "403",
+            description = "Forbidden",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "404",
+            description = "SpaceShip not found",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            }),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ErrorResource.class))
+            })
+      })
+  @RequestMapping(
+      method = RequestMethod.DELETE,
+      value = "/spaceship/{id}",
+      produces = {"application/json"})
+  default ResponseEntity<Void> deleteSpaceShip(
+      @Parameter(
+              name = "id",
+              description = "ID of the SpaceShip that needs to be retrieved",
+              required = true,
+              in = ParameterIn.PATH)
+          @PathVariable("id")
+          Long id) {
+    throw new UnsupportedOperationException("Not implemented");
+  }
 }

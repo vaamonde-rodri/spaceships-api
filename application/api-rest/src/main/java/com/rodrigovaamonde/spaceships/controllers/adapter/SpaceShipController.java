@@ -43,4 +43,10 @@ public class SpaceShipController implements SpaceShipApi {
 
     return ResponseEntity.ok(spaceShipDTO);
   }
+
+  @Override
+  public ResponseEntity<Void> deleteSpaceShip(Long id) {
+    spaceShipPort.delete(id);
+    return ResponseEntity.noContent().build();
+  }
 }

@@ -51,5 +51,7 @@ public class SpaceShipUseCase implements SpaceShipPort {
   }
 
   @Override
-  public void delete(Long id) {}
+  public void delete(Long id) {
+    spaceShipDatabasePort.delete(id);
+  }
 }

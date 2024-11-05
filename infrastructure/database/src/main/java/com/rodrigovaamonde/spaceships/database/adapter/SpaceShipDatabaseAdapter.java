@@ -42,5 +42,7 @@ public class SpaceShipDatabaseAdapter implements SpaceShipDatabasePort {
   }
 
   @Override
-  public void delete(Long id) {}
+  public void delete(Long id) {
+    spaceShipRepository.deleteById(id);
+  }
 }
