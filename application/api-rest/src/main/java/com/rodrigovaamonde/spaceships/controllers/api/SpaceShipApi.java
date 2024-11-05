@@ -68,6 +68,6 @@ public interface SpaceShipApi {
           @RequestBody
           @Valid
           SpaceShipDTO spaceShipDTO) {
-    return new ResponseEntity<SpaceShipDTO>(HttpStatus.NOT_IMPLEMENTED);
+    return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
   }
 }
