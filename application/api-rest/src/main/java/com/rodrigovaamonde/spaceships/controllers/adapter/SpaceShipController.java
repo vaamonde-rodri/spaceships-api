@@ -3,11 +3,13 @@ package com.rodrigovaamonde.spaceships.controllers.adapter;
 import com.rodrigovaamonde.spaceships.controllers.api.SpaceShipApi;
 import com.rodrigovaamonde.spaceships.controllers.dto.SpaceShipDTO;
 import com.rodrigovaamonde.spaceships.controllers.mapper.SpaceShipMapper;
+import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.application.SpaceShipPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -48,5 +50,15 @@ public class SpaceShipController implements SpaceShipApi {
   public ResponseEntity<Void> deleteSpaceShip(Long id) {
     spaceShipPort.delete(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @Override
+  public ResponseEntity<List<SpaceShipDTO>> getAllSpaceShips(Integer page, Integer size) {
+    List<SpaceShip> spaceShipList = spaceShipPort.findAll(page, size);
+    List<SpaceShipDTO> spaceShipDTOs = spaceShipList.stream()
+        .map(spaceShipMapper::toDTO)
+        .toList();
+
+    return ResponseEntity.ok(spaceShipDTOs);
   }
 }

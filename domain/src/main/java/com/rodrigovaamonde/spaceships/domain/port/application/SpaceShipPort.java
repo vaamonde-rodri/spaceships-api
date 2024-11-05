@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SpaceShipPort {
 
-    List<SpaceShip> findAll();
+    List<SpaceShip> findAll(int page, int size);
 
     SpaceShip findById(Long id);
 

@@ -6,6 +6,8 @@ import com.rodrigovaamonde.spaceships.database.repository.SpaceShipRepository;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.infrastructure.SpaceShipDatabasePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,10 @@ public class SpaceShipDatabaseAdapter implements SpaceShipDatabasePort {
   private final SpaceShipDatabaseMapper spaceShipDatabaseMapper;
 
   @Override
-  public List<SpaceShip> findAll() {
-    return List.of();
+  public List<SpaceShip> findAll(Pageable pageable) {
+    Page<SpaceShipMO> spaceShipMOs = spaceShipRepository.findAll(pageable);
+
+    return spaceShipMOs.stream().map(spaceShipDatabaseMapper::toDomain).toList();
   }
 
   @Override
