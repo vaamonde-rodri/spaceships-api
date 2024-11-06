@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,7 +34,8 @@ public class SpaceShipControllerIntegrationTest {
 
         mockMvc.perform(post("/spaceship")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(spaceShipDTO)))
+                        .content(objectMapper.writeValueAsString(spaceShipDTO))
+                .with(httpBasic("user", "password")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Test Ship"));
     }
@@ -41,7 +43,8 @@ public class SpaceShipControllerIntegrationTest {
     @Test
     void getSpaceShipReturnsResource() throws Exception {
         mockMvc.perform(get("/spaceship/1")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                .with(httpBasic("user", "password")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Serenity"));
     }
@@ -49,7 +52,8 @@ public class SpaceShipControllerIntegrationTest {
     @Test
     void deleteSpaceShipReturnsNoContent() throws Exception {
         mockMvc.perform(delete("/spaceship/1")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                .with(httpBasic("user", "password")))
                 .andExpect(status().isNoContent());
     }
 
