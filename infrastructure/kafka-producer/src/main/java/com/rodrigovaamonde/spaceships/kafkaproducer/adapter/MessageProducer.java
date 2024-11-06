@@ -28,6 +28,6 @@ public class MessageProducer implements KafkaProducerPort {
         .description(spaceShip.getDescription())
         .source(spaceShip.getSource())
         .build();
-    kafkaTemplate.send(topic, spaceShip);
+    kafkaTemplate.send(topic, spaceShip.getId().toString(), spaceShipEvent);
   }
 }
