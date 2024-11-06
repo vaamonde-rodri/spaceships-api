@@ -11,6 +11,8 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+  kafka:
+    topic: test-topic
   sql:
     init:
       schema-locations: classpath:schema.sql

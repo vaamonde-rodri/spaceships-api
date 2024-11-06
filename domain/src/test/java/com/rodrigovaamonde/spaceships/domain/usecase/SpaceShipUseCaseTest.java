@@ -3,6 +3,7 @@ package com.rodrigovaamonde.spaceships.domain.usecase;
 import com.rodrigovaamonde.spaceships.domain.exception.InvalidInputException;
 import com.rodrigovaamonde.spaceships.domain.exception.ResourceNotFoundException;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
+import com.rodrigovaamonde.spaceships.domain.port.infrastructure.KafkaProducerPort;
 import com.rodrigovaamonde.spaceships.domain.port.infrastructure.SpaceShipDatabasePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class SpaceShipUseCaseTest {
   @Mock private SpaceShipDatabasePort spaceShipDatabasePort;
+  @Mock private KafkaProducerPort kafkaProducerPort;
   @InjectMocks private SpaceShipUseCase spaceShipUseCase;
 
   private SpaceShip spaceShip;
