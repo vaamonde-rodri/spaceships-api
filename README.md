@@ -23,21 +23,11 @@ Spaceships API es una aplicación RESTful desarrollada con Spring Boot que propo
 
 ## Ejecución
 
-### Localmente
-
-1. Ejecuta la aplicación:
-    ```sh
-    mvn spring-boot:run
-    ```
-2. La aplicación estará disponible en `http://localhost:8080`.
-
-3. La UI de Swagger estará disponible en `http://localhost:8080/swagger-ui/index.html`.
-
 ### Con Docker
 
 1. Construye la imagen Docker:
     ```sh
-    docker build -t spaceships-api .
+    docker build -t spaceships-api boot/
     ```
 
 2. Ejecuta el contenedor:
@@ -46,6 +36,8 @@ Spaceships API es una aplicación RESTful desarrollada con Spring Boot que propo
     ```
 
 3. La aplicación estará disponible en `http://localhost:8080`.
+
+3. La UI de Swagger estará disponible en `http://localhost:8080/swagger-ui/index.html`.
 
 ## Seguridad
 La aplicación utiliza Spring Security para la autenticación básica. Las credenciales por defecto son:
