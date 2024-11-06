@@ -1,5 +1,6 @@
 package com.rodrigovaamonde.spaceships.domain.usecase;
 
+
 import com.rodrigovaamonde.spaceships.domain.annotation.UseCase;
 import com.rodrigovaamonde.spaceships.domain.exception.InvalidInputException;
 import com.rodrigovaamonde.spaceships.domain.exception.ResourceNotFoundException;
