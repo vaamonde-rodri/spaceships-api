@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>api-rest</artifactId>
+    <packaging>jar</packaging>
+    <name>spaceships-api-api-rest</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

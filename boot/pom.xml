@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>boot</artifactId>
+    <packaging>jar</packaging>
+    <name>spaceships-api-boot</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

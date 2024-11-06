@@ -51,11 +51,12 @@ La aplicación utiliza Spring Security para la autenticación básica. Las crede
 - Usuario: `user`
 - Contraseña: `password`
 
-## Dependencias Principales
-- Spring Boot Starter Web
-- Spring Boot Starter Security
-- Swagger Annotations
-- Jakarta Validation API
-- Lombok
-- Mockito JUnit Jupiter
-- MapStruct
+## Endpoints
+
+### Naves Espaciales
+- **POST /spaceship**: Crea una nueva nave espacial.
+- **PUT /spaceship/{id}**: Actualiza los detalles de una nave espacial específica por ID.
+- **GET /spaceship/{id}**: Obtiene los detalles de una nave espacial específica por ID.
+- **DELETE /spaceship/{id}**: Elimina una nave espacial específica por ID.
+- **GET /spaceship**: Obtiene una lista de todas las naves espaciales.
+- **GET /spaceship/search**: Busca naves espaciales por nombre.

@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>domain</artifactId>
+    <packaging>jar</packaging>
+    <name>spaceships-api-domain</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
