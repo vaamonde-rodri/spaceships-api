@@ -29,8 +29,9 @@ Spaceships API es una aplicación RESTful desarrollada con Spring Boot que propo
     ```sh
     mvn spring-boot:run
     ```
-
 2. La aplicación estará disponible en `http://localhost:8080`.
+
+3. La UI de Swagger estará disponible en `http://localhost:8080/swagger-ui/index.html`.
 
 ### Con Docker
 

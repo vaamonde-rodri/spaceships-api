@@ -17,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Validated
-@Tag(name = "SpaceShip", description = "SpaceShip API")
+@Tag(name = "SpaceShips", description = "SpaceShip API")
 public interface SpaceShipApi {
 
   @Operation(
