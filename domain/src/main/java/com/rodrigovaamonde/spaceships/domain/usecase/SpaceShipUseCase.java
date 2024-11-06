@@ -4,8 +4,10 @@ package com.rodrigovaamonde.spaceships.domain.usecase;
 import com.rodrigovaamonde.spaceships.domain.annotation.UseCase;
 import com.rodrigovaamonde.spaceships.domain.exception.InvalidInputException;
 import com.rodrigovaamonde.spaceships.domain.exception.ResourceNotFoundException;
+import com.rodrigovaamonde.spaceships.domain.model.EventType;
 import com.rodrigovaamonde.spaceships.domain.model.SpaceShip;
 import com.rodrigovaamonde.spaceships.domain.port.application.SpaceShipPort;
+import com.rodrigovaamonde.spaceships.domain.port.infrastructure.KafkaProducerPort;
 import com.rodrigovaamonde.spaceships.domain.port.infrastructure.SpaceShipDatabasePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class SpaceShipUseCase implements SpaceShipPort {
 
   private final SpaceShipDatabasePort spaceShipDatabasePort;
+  private final KafkaProducerPort kafkaProducerPort;
 
   @Override
   @Cacheable(value = "spaceShips", key = "#page + '-' + #size")
@@ -74,7 +77,11 @@ public class SpaceShipUseCase implements SpaceShipPort {
       throw new InvalidInputException("SpaceShip must not be null");
     }
 
-    return spaceShipDatabasePort.save(spaceShip);
+    SpaceShip savedSpaceShip = spaceShipDatabasePort.save(spaceShip);
+
+    kafkaProducerPort.produceSpaceShipMessage(EventType.CREATE, savedSpaceShip);
+
+    return savedSpaceShip;
   }
 
   @Override
@@ -88,18 +95,23 @@ public class SpaceShipUseCase implements SpaceShipPort {
       throw new InvalidInputException("SpaceShip must not be null");
     }
 
-
     SpaceShip spaceShipToUpdate = spaceShipDatabasePort.findById(id);
 
-    return Optional.ofNullable(spaceShipToUpdate)
-        .map(
-            s -> {
-              s.setName(spaceShip.getName());
-              s.setDescription(spaceShip.getDescription());
-              s.setSource(spaceShip.getSource());
-              return spaceShipDatabasePort.save(s);
-            })
-        .orElse(null);
+    SpaceShip updatedSpaceShip = Optional.ofNullable(spaceShipToUpdate)
+            .map(
+                    s -> {
+                      s.setName(spaceShip.getName());
+                      s.setDescription(spaceShip.getDescription());
+                      s.setSource(spaceShip.getSource());
+                      return spaceShipDatabasePort.save(s);
+                    })
+            .orElse(null);
+
+    if (updatedSpaceShip != null) {
+        kafkaProducerPort.produceSpaceShipMessage(EventType.UPDATE, updatedSpaceShip);
+    }
+
+    return updatedSpaceShip;
   }
 
   @Override
@@ -109,6 +121,10 @@ public class SpaceShipUseCase implements SpaceShipPort {
       throw new InvalidInputException("Id must be greater than 0");
     }
 
+    SpaceShip spaceShip = spaceShipDatabasePort.findById(id);
+
     spaceShipDatabasePort.delete(id);
+
+    kafkaProducerPort.produceSpaceShipMessage(EventType.DELETE, spaceShip);
   }
 }
