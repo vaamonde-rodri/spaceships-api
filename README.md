@@ -3,10 +3,11 @@
 ## Descripción
 Spaceships API es una aplicación RESTful desarrollada con Spring Boot que proporciona servicios relacionados con naves espaciales. La aplicación incluye autenticación básica y está configurada para ejecutarse en un contenedor Docker.
 
-## Requisitos
-- Java 21
-- Maven
-- Docker
+## Prerrequisitos
+Asegúrate de tener instaladas las siguientes herramientas:
+- [Java 21](https://www.oracle.com/java/technologies/javase-jdk21-downloads.html)
+- [Maven](https://maven.apache.org/install.html)
+- [Docker](https://docs.docker.com/get-docker/)
 
 ## Instalación
 
