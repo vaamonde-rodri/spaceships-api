@@ -18,6 +18,7 @@
     <module>application</module>
     <module>boot</module>
     <module>infrastructure</module>
+    <module>infrastructure/redis</module>
   </modules>
   <properties>
     <java.version>21</java.version>
@@ -41,6 +42,11 @@
       <dependency>
         <groupId>com.rodrigovaamonde.spaceships</groupId>
         <artifactId>kafka-producer</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.rodrigovaamonde.spaceships</groupId>
+        <artifactId>redis</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
