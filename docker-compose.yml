@@ -38,3 +38,8 @@ services:
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka:29092 --list
       "
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
