@@ -26,12 +26,11 @@ Asegúrate de tener instaladas las siguientes herramientas:
     mvn clean install
     ```
 
-3. Generar los contenedores para Kafka y Zookeeper:
+3. Generar los contenedores para Kafka, Zookeeper y Redis:
     ```sh
     docker-compose -f docker-compose.yml up -d
     ```
-   Esto lo que hará es levantar un contenedor con Kafka y otro con Zookeeper, de forma que la aplicación pueda
-   conectarse a ellos y enviar mensajes a un tópico de Kafka.
+   Esto lo que hará es levantar contenedores con Kafka, Zookeeper y Redis, necesarios para la aplicación.
 
 ## Ejecución
 
